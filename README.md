@@ -55,4 +55,12 @@ To run the application, you’ll need to set up the following environment variab
 5. **MAVEN_HOME**:
    - **Description**: The path to the Maven installation
    - **Example**: MAVEN_HOME=C:\Program Files\Apache\maven
-  
+
+### Running the project:
+
+- Navigate to the project directory : cd /path/to/your/project
+
+- Run the project using Maven:
+   - mvn clean install
+   - mvn spring-boot:run
+
