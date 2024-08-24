@@ -67,9 +67,14 @@ To run the application, you’ll need to set up the following environment variab
 ### Key Features
 
  1. **RESTful API with Spring Boot**: Provides a robust backend for managing football matches, teams, leagues, and users with comprehensive CRUD operations
+    
  2. **MySQL Database Integration**: Stores all match, team, league, and user data, ensuring persistent and reliable data management
+    
  3. **Hibernate ORM**: Utilizes Hibernate for Object-Relational Mapping (ORM), simplifying database interactions and enhancing data handling efficiency
+    
  4. **Real-Time Updates**: Supports real-time updates for live match scores and league tables, keeping users informed with the latest information
+    
  5. **User Authentication and Authorization**: Ensures secure access to the application, allowing users to register, log in, and manage their data securely
+     
  6. **Efficient Data Management**: Optimizes data queries and transactions, providing fast and reliable performance for all backend operations
 
