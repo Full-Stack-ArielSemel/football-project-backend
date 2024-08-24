@@ -31,3 +31,28 @@ Before setting up and running the backend of the Football Project, ensure that t
    
    - **Recommended**: IntelliJ IDEA
    - **installation**: [Download IntelliJ IDEA](https://www.jetbrains.com/idea/download/?section=windows)
+
+### Environment Variables
+
+To run the application, you’ll need to set up the following environment variables:
+
+1. **DB_URL**:
+   - **Description**: The URL of the MySQL database
+   - **Example**: DB_URL=jdbc:mysql://localhost:3306/football_project
+
+2. **DB_USERNAME**:
+   - **Description**: The username for accessing the MySQL database
+   - **Example**: DB_USERNAME=root
+
+3. **DB_PASSWORD**:
+   - **Description**: The password for accessing the MySQL database
+   - **Example**: DB_PASSWORD=1234
+
+4. **JAVA_HOME**:
+   - **Description**: The path to the JDK installation
+   - **Example**: JAVA_HOME=C:\Program Files\Java\jdk1.8.0_251
+
+5. **MAVEN_HOME**:
+   - **Description**: The path to the Maven installation
+   - **Example**: MAVEN_HOME=C:\Program Files\Apache\maven
+  
