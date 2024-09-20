@@ -5,7 +5,7 @@ It provides RESTful APIs that the frontend interacts with,
 enabling users to perform various football-related operations and also handles user authentication and authorization, ensuring secure access to the system.**
 
 ### Prerequisites
-Before setting up and running the backend of the Football Project, ensure that the following software is installed on your system:
+Before setting up and running this backend, ensure that the following software is installed on your system:
 
 1. **Java Development Kit (JDK)**:
    
