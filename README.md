@@ -1,8 +1,8 @@
 ### Overview
-**This is the backend of the Football Project, a web application designed to manage football matches, view live scores, and display league tables.
-The backend is built using Spring Boot and is powered by a MySQL database.
-It provides RESTful APIs that the frontend interacts with, enabling users to perform various football-related operations such as managing games, teams, and leagues.
-The backend also handles user authentication and authorization, ensuring secure access to the system.**
+**This is the backend of the Football Project, A RESTful API for managing football games, real-time scores and standings, built with Spring Boot and MySQL.
+Users can create games, update the scores of their own games, and view real-time results and league standings for all users across various leagues.
+It provides RESTful APIs that the frontend interacts with,
+enabling users to perform various football-related operations and also handles user authentication and authorization, ensuring secure access to the system.**
 
 ### Prerequisites
 Before setting up and running the backend of the Football Project, ensure that the following software is installed on your system:
