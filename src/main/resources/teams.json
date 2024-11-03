@@ -1,0 +1,29 @@
+[
+  {
+    "name": "Arsenal",
+    "icon": "https://download.logo.wine/logo/Arsenal_F.C./Arsenal_F.C.-Logo.wine.png",
+    "league": {
+      "leagueId": 1,
+      "name": "Premier League",
+      "logo": "https://seeklogo.com/images/P/premier-league-new-logo-D22A0CE87E-seeklogo.com.png"
+    }
+  },
+  {
+    "name": "Aston Villa",
+    "icon": "https://1000logos.net/wp-content/uploads/2022/05/Aston-Villa-Logo.png",
+    "league": {
+      "leagueId": 1,
+      "name": "Premier League",
+      "logo": "https://seeklogo.com/images/P/premier-league-new-logo-D22A0CE87E-seeklogo.com.png"
+    }
+  },
+  {
+    "name": "Bayern Munich",
+    "icon": "https://example.com/icon_bayern_munich.png",
+    "league": {
+      "leagueId": 2,
+      "name": "Bundesliga",
+      "logo": "https://1000logos.net/wp-content/uploads/2021/06/German-Bundesliga-logo.png"
+    }
+  }
+]

@@ -28,8 +28,6 @@ public class League {
     @Column
     private String logo;
 
-
-
     public League(){}
 
     public League(Integer id ,String name, String logo){

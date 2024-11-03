@@ -1,12 +1,16 @@
 package com.dev.utils;
 
 import com.dev.objects.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
+import java.io.File;
+import java.io.IOException;
 import java.sql.*;
 import java.util.*;
 
@@ -29,10 +33,86 @@ public class Persist {
             this.connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
             System.out.println("Successfully connected to DB");
 
+            insertStaticDataIfNecessary();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+    private void insertStaticDataIfNecessary() {
+        if (!staticDataExists()) {
+            List<League> leagues = readLeaguesFromFile();  // Read leagues first
+            if (leagues != null && !leagues.isEmpty()) {
+                Session session = sessionFactory.openSession();
+                Transaction transaction = session.beginTransaction();
+                try {
+                    for (League league : leagues) {
+                        session.save(league);
+                    }
+                    transaction.commit();
+                    System.out.println("Leagues initialized successfully.");
+                } catch (Exception e) {
+                    transaction.rollback();
+                    e.printStackTrace();
+                } finally {
+                    session.close();
+                }
+            }
+
+            // Now read teams and assign league ids
+            List<Team> teams = readTeamsFromFile();
+            if (teams != null && !teams.isEmpty()) {
+                Session session = sessionFactory.openSession();
+                Transaction transaction = session.beginTransaction();
+                try {
+                    for (Team team : teams) {
+                        League league = session.get(League.class, team.getLeague().getLeagueId()); // Get the league using league_id
+                        team.setLeague(league); // Set the league in the team
+                        session.save(team);
+                    }
+                    transaction.commit();
+                    System.out.println("Teams initialized successfully.");
+                } catch (Exception e) {
+                    transaction.rollback();
+                    e.printStackTrace();
+                } finally {
+                    session.close();
+                }
+            }
+        } else {
+            System.out.println("Static data already exists. Skipping initialization.");
+        }
+    }
+
+    private List<League> readLeaguesFromFile() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            File file = new File("src/main/resources/leagues.json");
+            return objectMapper.readValue(file, new TypeReference<List<League>>() {});
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private List<Team> readTeamsFromFile() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            File file = new File("src/main/resources/teams.json");
+            return objectMapper.readValue(file, new TypeReference<List<Team>>() {});
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    private boolean staticDataExists() {
+        Session session = sessionFactory.openSession();
+        long count = (long) session.createQuery("SELECT COUNT(t) FROM Team t").uniqueResult();
+        session.close();
+        return count > 0;
+    }
+
 //User Persist...
 
     public void createUser(User user) {sessionFactory.openSession().save(user);}
@@ -107,12 +187,38 @@ public class Persist {
         session.close();
         return found;
    }
+
     //Team Persist...
     public List<Team> getAllTeamsByLeagueID(int leagueID) {
         return sessionFactory.openSession().
                 createQuery(" FROM Team WHERE league.leagueId=:leagueID")
                 .setParameter("leagueID",leagueID).list();
     }
+
+    public Team getTeamByTeamId(int teamID){
+
+        return (Team) sessionFactory.openSession().
+                createQuery("FROM Team WHERE team_id = :teamID").
+                setParameter("teamID", teamID).uniqueResult();
+    }
+
+    public boolean isTeamNotMatchToSpecificLeague(int teamID , int leagueID){
+
+        List <Team> teams = sessionFactory.openSession().createQuery
+                        ("FROM Team WHERE team_id=:teamID AND league.leagueId=:leagueID").
+                setParameter("teamID",teamID).setParameter("leagueID",leagueID).list();
+
+        return teams.isEmpty();
+    }
+    public boolean TeamDoesntExist(int teamID){
+
+        List <Team> teams = sessionFactory.openSession().createQuery
+                ("FROM Team WHERE team_id=:teamID").setParameter
+                ("teamID",teamID).list();
+
+        return teams.isEmpty();
+    }
+
 
 //Game persist...
 
@@ -212,27 +318,11 @@ public class Persist {
         return game;
     }
 
-    public Team getTeamByTeamId(int teamID){
-
-        return (Team) sessionFactory.openSession().
-                createQuery("FROM Team WHERE team_id = :teamID").
-                setParameter("teamID", teamID).uniqueResult();
-    }
-
+    // League persist...
     public List<League>getAllLeagues(){
 
         return sessionFactory.openSession().createQuery
                 ("FROM League ").list();
-    }
-
-    public boolean isTeamNotMatchToSpecificLeague(int teamID , int leagueID){
-
-        List <Team> teams = sessionFactory.openSession().createQuery
-                ("FROM Team WHERE team_id=:teamID AND league.leagueId=:leagueID").
-        setParameter("teamID",teamID).setParameter("leagueID",leagueID).list();
-
-        return teams.isEmpty();
-
     }
 
     public boolean LeagueDoesntExist(int leagueID){
@@ -244,20 +334,10 @@ public class Persist {
         return league==null;
     }
 
-    public boolean TeamDoesntExist(int teamID){
-
-        List <Team> teams = sessionFactory.openSession().createQuery
-                ("FROM Team WHERE team_id=:teamID").setParameter
-                ("teamID",teamID).list();
-
-        return teams.isEmpty();
-    }
-
     public League getLeagueByLeagueID(int leagueID){
 
         return (League) sessionFactory.openSession().createQuery
                 ("FROM League WHERE leagueId=:leagueID").
                 setParameter("leagueID",leagueID).uniqueResult();
     }
-
 }
