@@ -43,48 +43,42 @@ public class UserController {
     @RequestMapping(value = "sign-up")
     public BasicResponse signUp(String username, String password) {
 
-        if (username != null) {
-            if (password != null) {
-                if (utils.validPasswordSize(password)) {
-                    if (utils.isPasswordContainsLowerLetter(password)) {
-                        if (utils.isPasswordContainsCapitalLetter(password)) {
-                            if (utils.isPasswordContainsDigit(password)) {
-                                if (utils.validUserNameSize(username)) {
-                                    if (utils.isUsernameContainsLetter(username)) {
-                                        User fromDb = persist.getUserByUsername(username);
-                                        if (fromDb == null) {
-                                            User newUser = new User(username, utils.createHash(username, password));
-                                            persist.createUser(newUser);
-                                            return new SignUpResponse(true, null, newUser);
-                                        } else {
-                                            return new BasicResponse(false, ERROR_USERNAME_ALREADY_EXISTS);
-                                        }
-                                    } else {
-                                        return new BasicResponse(false, ERROR_USERNAME_WITHOUT_LETTER);
-                                    }
-                                } else {
-                                    return new BasicResponse(false, ERROR_USERNAME_SIZE);
-                                }
-                            } else {
-                                return new BasicResponse(false, ERROR_PASSWORD_WITHOUT_DIGIT);
-                            }
-                        } else {
-                            return new BasicResponse(false, ERROR_PASSWORD_WITHOUT_CAPITAL_LETTER);
-                        }
-                    } else {
-                        return new BasicResponse(false, ERROR_PASSWORD_WITHOUT_LOWER_LETTER);
-                    }
-                } else {
-                    return new BasicResponse(false, ERROR_PASSWORD_SIZE);
-                }
-            } else {
-                return new BasicResponse(false, ERROR_MISSING_PASSWORD);
-            }
-        }
-        else{
+        if(username==null){
             return new BasicResponse(false,ERROR_MISSING_USERNAME);
         }
+        if(password==null){
+            return new BasicResponse(false, ERROR_MISSING_PASSWORD);
+        }
+        if (!utils.validPasswordSize(password)) {
+            return new BasicResponse(false, ERROR_PASSWORD_SIZE);
+        }
+        if (!utils.isPasswordContainsLowerLetter(password)) {
+            return new BasicResponse(false, ERROR_PASSWORD_WITHOUT_LOWER_LETTER);
+        }
+        if (!utils.isPasswordContainsCapitalLetter(password)) {
+            return new BasicResponse(false, ERROR_PASSWORD_WITHOUT_CAPITAL_LETTER);
+        }
+        if (!utils.isPasswordContainsDigit(password)) {
+            return new BasicResponse(false, ERROR_PASSWORD_WITHOUT_DIGIT);
+        }
+        if (!utils.validUserNameSize(username)){
+            return new BasicResponse(false, ERROR_USERNAME_SIZE);
+        }
+        if (!utils.isUsernameContainsLetter(username)){
+            return new BasicResponse(false, ERROR_USERNAME_WITHOUT_LETTER);
+        }
+
+        User fromDb = persist.getUserByUsername(username);
+        if (fromDb == null) {
+            User newUser = new User(username, utils.createHash(username, password));
+            persist.createUser(newUser);
+            return new SignUpResponse(true, null, newUser);
+        }
+        else {
+            return new BasicResponse(false, ERROR_USERNAME_ALREADY_EXISTS);
+        }
     }
+
 
     @RequestMapping(value = "login")
     public BasicResponse login(String username, String password) {
