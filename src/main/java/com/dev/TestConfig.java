@@ -25,6 +25,7 @@ public class TestConfig {
 
     @Bean
     public Properties dataSource() throws Exception {
+        
         Properties settings = new Properties();
 
         String dbUrl = System.getenv("DB_URL");

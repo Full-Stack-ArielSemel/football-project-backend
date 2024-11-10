@@ -1,5 +1,6 @@
 com\dev\controllers\TableController.class
 com\dev\controllers\UserController.class
+com\dev\utils\Persist$2.class
 com\dev\responses\LiveGamesByUserResponse.class
 com\dev\utils\Utils$1.class
 com\dev\responses\LoginResponse.class
@@ -17,13 +18,13 @@ com\dev\responses\UserResponse.class
 com\dev\utils\Utils.class
 com\dev\controllers\TeamController.class
 com\dev\Main.class
+com\dev\utils\Persist$1.class
 com\dev\responses\BasicResponse.class
 com\dev\objects\Team.class
 com\dev\responses\AddGameResponse.class
 com\dev\objects\Game.class
 com\dev\utils\Persist.class
 com\dev\utils\Constants.class
-com\dev\AppConfig$1.class
 com\dev\objects\User.class
 com\dev\controllers\LeagueController.class
 com\dev\objects\League.class
