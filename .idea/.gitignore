@@ -7,5 +7,7 @@
 /dataSources/
 /dataSources.local.xml
 
-/target/
-/.env/
+.idea/
+*.iml
+target/
+.env
