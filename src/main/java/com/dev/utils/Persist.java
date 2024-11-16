@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.io.File;
@@ -20,22 +21,28 @@ public class Persist {
     private Connection connection;
     private final SessionFactory sessionFactory;
 
+    @Value("${DB_URL}")
+    private String dbUrl;
+
+    @Value("${DB_USERNAME}")
+    private String dbUsername;
+
+    @Value("${DB_PASSWORD}")
+    private String dbPassword;
+
     @Autowired
     public Persist(SessionFactory sessionFactory) {this.sessionFactory = sessionFactory;}
 
     @PostConstruct
     public void createConnectionToDatabase() {
         try {
-            String dbUrl = System.getenv("DB_URL");
-            String dbUsername = System.getenv("DB_USERNAME");
-            String dbPassword = System.getenv("DB_PASSWORD");
-
             this.connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
             System.out.println("Successfully connected to DB");
 
             insertStaticDataIfNecessary();
 
         } catch (SQLException e) {
+            System.err.println("Failed to connect to the database: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -80,7 +87,7 @@ public class Persist {
                 }
             }
         } else {
-            System.out.println("Static data already exists. Skipping initialization.");
+            System.out.println("Static Data already exists. Skipping initialization...");
         }
     }
 
@@ -88,7 +95,8 @@ public class Persist {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             File file = new File("src/main/resources/leagues.json");
-            return objectMapper.readValue(file, new TypeReference<List<League>>() {});
+            return objectMapper.readValue(file, new TypeReference<>() {
+            });
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -122,7 +130,7 @@ public class Persist {
              createQuery(" FROM User ").list();
     }
     public User getUserByToken(String token){
-        User found = null;
+        User found;
         Session session = sessionFactory.openSession();
         found = (User)session.createQuery("FROM User WHERE token = :token").
                 setParameter("token",token).
@@ -132,7 +140,7 @@ public class Persist {
     }
 
     public User getUserByUsername(String username){
-        User found = null;
+        User found;
         Session session = sessionFactory.openSession();
         found = (User) session.createQuery("FROM User WHERE username = :username").
                 setParameter("username",username).
@@ -177,7 +185,7 @@ public class Persist {
         return response;
     }
    public User getUserByUsernameAndToken(String username , String token){
-        User found = null;
+        User found;
         Session session = sessionFactory.openSession();
         found = (User)session.createQuery("FROM User WHERE username = :username " +
                 "AND token = :token")
