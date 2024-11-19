@@ -32,6 +32,15 @@ Before setting up and running this backend, ensure that the following software i
         export MAVEN_HOME=/path/to/maven
         export PATH=$MAVEN_HOME/bin:$PATH
 
+### Database Setup
+1. **Create a new Database:**
+   ```bash
+   CREATE DATABASE your_db_name;
+   
+2. **Configure Database Credentials:**
+   - Download the .env.sample file and rename it to .env in the root directory of your project.
+   - Update the .env file with your database credentials and any other environment variables required by the application (e.g., API keys, secret keys).
+     
 ### Running the project
 
 - Navigate to the project directory : cd /path/to/your/project
