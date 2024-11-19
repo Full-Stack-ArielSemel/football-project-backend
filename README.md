@@ -41,13 +41,23 @@ Before setting up and running this backend, ensure that the following software i
    - Download the .env.sample file and rename it to .env in the root directory of your project.
    - Update the .env file with your database credentials and any other environment variables required by the application (e.g., API keys, secret keys).
      
+3. **Flyway Database Migration:**
+   - Flyway is already set up in the project to manage database schema migrations. The migration scripts are located in src/main/resources/db/migration/
+   - **Automatic Migration**: When you run the application, Flyway will automatically apply any pending migrations to the database.
+   - **Manual Migration**: Alternatively, you can manually run migrations with this Maven command:
+     ```bash
+     mvn flyway:migrate
+     
 ### Running the project
 
-- Navigate to the project directory : cd /path/to/your/project
-
-- Run the project using Maven:
-   - mvn clean install
-   - mvn spring-boot:run
+1. **Navigate to the project directory:**
+   ```bash
+      cd /path/to/your/project
+   
+2. **Run the project using Maven:**
+   ```bash
+      mvn clean install
+      mvn spring-boot:run
 
 ### Key Features
 
