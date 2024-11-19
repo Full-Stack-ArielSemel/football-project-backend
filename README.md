@@ -1,3 +1,11 @@
+## Table of Contents
+
+1. [Overview](#overview)
+2. [Prerequisites](#prerequisites)
+3. [Database Setup](#database-setup)
+4. [Running the Project](#running-the-project)
+5. [Tools and Technologies Used](#tools-and-technologies-used)
+
 ### Overview
 **This is the backend of the Football Project, A RESTful API for managing football games, real-time scores and standings, built with Spring Boot and MySQL.
 Users can create games, update the scores of their own games, and view real-time results and league standings for all users across various leagues.
