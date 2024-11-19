@@ -12,7 +12,7 @@ Users can create games, update the scores of their own games, and view real-time
 It provides RESTful APIs that the frontend interacts with,
 enabling users to perform various football-related operations and also handles user authentication and authorization, ensuring secure access to the system.**
 
-**For the frontend implementation of this project, visit the [Frontend Repository]([https://github.com/your-frontend-repo-link](https://github.com/Full-Stack-ArielSemel/football-project-frontend)).**
+**For the frontend Repository of this project, visit the [Frontend Repository](https://github.com/Full-Stack-ArielSemel/football-project-frontend).**
 
 ### Prerequisites
 Before setting up and running this backend, ensure that the following software is installed on your system:
