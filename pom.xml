@@ -19,7 +19,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
         <hibernate.version>5.4.27.Final</hibernate.version>
         <spring.boot.version>3.3.5</spring.boot.version>
         <spring.orm.version>5.0.6.RELEASE</spring.orm.version>
@@ -28,8 +28,6 @@
     </properties>
 
     <dependencies>
-
-        <!-- HTTP Client for REST API calls -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
@@ -57,10 +55,19 @@
 
         <!-- MySQL Connector -->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.46</version>
+           <groupId>com.mysql</groupId>
+           <artifactId>mysql-connector-j</artifactId>
+           <version>8.1.0</version>
+           <scope>runtime</scope>
         </dependency>
+
+        <!-- MySQL JDBC driver -->
+       <dependency>
+          <groupId>mysql</groupId>
+          <artifactId>mysql-connector-java</artifactId>
+          <version>8.0.33</version> 
+       </dependency>
+
 
         <!-- Hibernate Core -->
         <dependency>
@@ -163,6 +170,31 @@
             <groupId>javax.annotation</groupId>
             <artifactId>javax.annotation-api</artifactId>
             <version>1.3.2</version>
+        </dependency>
+
+        <dependency>
+           <groupId>org.flywaydb</groupId>
+           <artifactId>flyway-core</artifactId>
+           <version>9.0.0</version>
+        </dependency>
+
+        <dependency>
+           <groupId>org.flywaydb</groupId>
+           <artifactId>flyway-mysql</artifactId>
+           <version>9.0.0</version>
+        </dependency>
+
+        <dependency>
+           <groupId>mysql</groupId>
+           <artifactId>mysql-connector-java</artifactId>
+           <version>8.0.28</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>5.1.0</version>
         </dependency>
 
     </dependencies>

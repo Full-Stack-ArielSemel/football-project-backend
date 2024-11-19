@@ -1,22 +1,11 @@
-package com.dev.objects;
-
-import com.dev.utils.Persist;
-import com.dev.utils.Utils;
-import org.hibernate.SessionBuilder;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
+package com.dev.models;
 
 import javax.persistence.*;
-import java.util.List;
-
-
 
 @Entity
 @Table(name="leagues")
 
 public class League {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +14,7 @@ public class League {
 
     @Column
     private String name;
+
     @Column
     private String logo;
 
@@ -34,13 +24,10 @@ public class League {
         this.leagueId = id;
         this.name=name;
         this.logo=logo;
-
     }
-
     public League (String name, String logo){
         this.name = name;
         this.logo = logo;
-
     }
 
     public Integer getLeagueId() {
@@ -66,6 +53,4 @@ public class League {
     public void setLogo(String logo) {
         this.logo = logo;
     }
-
-
 }

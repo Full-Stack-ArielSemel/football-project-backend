@@ -1,8 +1,6 @@
 package com.dev.utils;
 
-import com.dev.objects.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.dev.models.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -10,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
-import java.io.File;
-import java.io.IOException;
 import java.sql.*;
 import java.util.*;
 
@@ -31,104 +27,32 @@ public class Persist {
     private String dbPassword;
 
     @Autowired
-    public Persist(SessionFactory sessionFactory) {this.sessionFactory = sessionFactory;}
-
+    public Persist(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
     @PostConstruct
     public void createConnectionToDatabase() {
         try {
+            System.out.println("Attempting to connect to the database...");
             this.connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
             System.out.println("Successfully connected to DB");
-
-            insertStaticDataIfNecessary();
 
         } catch (SQLException e) {
             System.err.println("Failed to connect to the database: " + e.getMessage());
             e.printStackTrace();
         }
     }
-    private void insertStaticDataIfNecessary() {
-        if (!staticDataExists()) {
-            List<League> leagues = readLeaguesFromFile();  // Read leagues first
-            if (leagues != null && !leagues.isEmpty()) {
-                Session session = sessionFactory.openSession();
-                Transaction transaction = session.beginTransaction();
-                try {
-                    for (League league : leagues) {
-                        session.save(league);
-                    }
-                    transaction.commit();
-                    System.out.println("Leagues initialized successfully.");
-                } catch (Exception e) {
-                    transaction.rollback();
-                    e.printStackTrace();
-                } finally {
-                    session.close();
-                }
-            }
-
-            // Now read teams and assign league ids
-            List<Team> teams = readTeamsFromFile();
-            if (teams != null && !teams.isEmpty()) {
-                Session session = sessionFactory.openSession();
-                Transaction transaction = session.beginTransaction();
-                try {
-                    for (Team team : teams) {
-                        League league = session.get(League.class, team.getLeague().getLeagueId()); // Get the league using league_id
-                        team.setLeague(league); // Set the league in the team
-                        session.save(team);
-                    }
-                    transaction.commit();
-                    System.out.println("Teams initialized successfully.");
-                } catch (Exception e) {
-                    transaction.rollback();
-                    e.printStackTrace();
-                } finally {
-                    session.close();
-                }
-            }
-        } else {
-            System.out.println("Static Data already exists. Skipping initialization...");
-        }
-    }
-
-    private List<League> readLeaguesFromFile() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            File file = new File("src/main/resources/leagues.json");
-            return objectMapper.readValue(file, new TypeReference<>() {
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    private List<Team> readTeamsFromFile() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            File file = new File("src/main/resources/teams.json");
-            return objectMapper.readValue(file, new TypeReference<List<Team>>() {});
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-    
-    private boolean staticDataExists() {
-        Session session = sessionFactory.openSession();
-        long count = (long) session.createQuery("SELECT COUNT(t) FROM Team t").uniqueResult();
-        session.close();
-        return count > 0;
-    }
 
 //User Persist...
 
+    
     public void createUser(User user) {sessionFactory.openSession().save(user);}
-    public List<User> getAllUsers() {
 
+    public List<User> getAllUsers() {
       return sessionFactory.openSession().
              createQuery(" FROM User ").list();
     }
+
     public User getUserByToken(String token){
         User found;
         Session session = sessionFactory.openSession();
@@ -142,7 +66,7 @@ public class Persist {
     public User getUserByUsername(String username){
         User found;
         Session session = sessionFactory.openSession();
-        found = (User) session.createQuery("FROM User WHERE username = :username").
+        found = (User)session.createQuery("FROM User WHERE username = :username").
                 setParameter("username",username).
                 uniqueResult();
         session.close();
@@ -205,7 +129,7 @@ public class Persist {
 
     public Team getTeamByTeamId(int teamID){
 
-        return (Team) sessionFactory.openSession().
+        return (Team)sessionFactory.openSession().
                 createQuery("FROM Team WHERE team_id = :teamID").
                 setParameter("teamID", teamID).uniqueResult();
     }

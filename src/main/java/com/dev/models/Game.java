@@ -1,4 +1,4 @@
-package com.dev.objects;
+package com.dev.models;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,10 +12,13 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="game_id")
     private Integer game_Id;
+
     @Column(name="is_live")
     private boolean isLive;
+
     @Column(name="score_home_team")
     private int scoreHomeTeam;
+
     @Column(name="score_away_team")
     private int scoreAwayTeam;
 
@@ -26,6 +29,7 @@ public class Game {
     @ManyToOne
     @JoinColumn(name ="home_team_id")
     private Team homeTeam;
+    
     @ManyToOne
     @JoinColumn(name = "away_team_id")
     private Team awayTeam;

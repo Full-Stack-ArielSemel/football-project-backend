@@ -1,7 +1,7 @@
 
 package com.dev.controllers;
-import com.dev.objects.Game;
-import com.dev.objects.User;
+import com.dev.models.Game;
+import com.dev.models.User;
 import com.dev.responses.BasicResponse;
 import com.dev.responses.AddGameResponse;
 import com.dev.responses.UpdateScoreResponse;

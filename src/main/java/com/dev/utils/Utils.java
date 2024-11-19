@@ -1,8 +1,8 @@
 package com.dev.utils;
 
-import com.dev.objects.Game;
-import com.dev.objects.Team;
-import com.dev.objects.TeamStats;
+import com.dev.models.Game;
+import com.dev.models.Team;
+import com.dev.models.TeamStats;
 import org.springframework.stereotype.Component;
 
 import javax.xml.bind.DatatypeConverter;

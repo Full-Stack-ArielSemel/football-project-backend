@@ -1,4 +1,4 @@
-package com.dev.objects;
+package com.dev.models;
 
 
 public class TeamStats extends Team {

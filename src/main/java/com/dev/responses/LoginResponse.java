@@ -1,6 +1,6 @@
 package com.dev.responses;
 
-import com.dev.objects.User;
+import com.dev.models.User;
 
 public class LoginResponse extends BasicResponse{
     private User user;

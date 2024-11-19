@@ -1,6 +1,6 @@
 package com.dev.controllers;
 
-import com.dev.objects.League;
+import com.dev.models.League;
 import com.dev.utils.Persist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

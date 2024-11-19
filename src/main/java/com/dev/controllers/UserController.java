@@ -1,5 +1,5 @@
 package com.dev.controllers;
-import com.dev.objects.User;
+import com.dev.models.User;
 import com.dev.responses.*;
 import com.dev.utils.Persist;
 import com.dev.utils.Utils;
@@ -78,7 +78,6 @@ public class UserController {
             return new BasicResponse(false, ERROR_USERNAME_ALREADY_EXISTS);
         }
     }
-
 
     @RequestMapping(value = "login")
     public BasicResponse login(String username, String password) {

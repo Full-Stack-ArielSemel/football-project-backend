@@ -1,4 +1,4 @@
-package com.dev.objects;
+package com.dev.models;
 
 import javax.persistence.*;
 
@@ -11,9 +11,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Integer user_id;
+
     @Column
     private String username;
     @Column
+
     private String token;
 
     public User() {}
@@ -46,5 +48,4 @@ public class User {
     public void setUserId(Integer user_id) {
         this.user_id = user_id;
     }
-
 }

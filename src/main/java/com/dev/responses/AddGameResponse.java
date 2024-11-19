@@ -1,6 +1,6 @@
 package com.dev.responses;
 
-import com.dev.objects.Game;
+import com.dev.models.Game;
 
 public class AddGameResponse extends BasicResponse {
 

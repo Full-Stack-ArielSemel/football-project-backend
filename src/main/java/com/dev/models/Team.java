@@ -1,4 +1,4 @@
-package com.dev.objects;
+package com.dev.models;
 
 import javax.persistence.*;
 
@@ -10,8 +10,10 @@ import javax.persistence.*;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Integer team_id;
+
     @Column
     private String name;
+    
     @Column
     private String icon;
 
@@ -33,7 +35,6 @@ import javax.persistence.*;
         this.league = league;
         this.name = name;
         this.icon=icon;
-
     }
 
     public String getName() {return this.name;}

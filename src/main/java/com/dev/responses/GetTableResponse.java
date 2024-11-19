@@ -1,6 +1,6 @@
 package com.dev.responses;
 
-import com.dev.objects.TeamStats;
+import com.dev.models.TeamStats;
 
 import java.util.List;
 

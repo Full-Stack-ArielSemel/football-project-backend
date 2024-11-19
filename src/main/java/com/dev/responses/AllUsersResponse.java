@@ -1,6 +1,6 @@
 package com.dev.responses;
 
-import com.dev.objects.User;
+import com.dev.models.User;
 
 import java.util.List;
 
