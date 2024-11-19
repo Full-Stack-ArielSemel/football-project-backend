@@ -80,7 +80,7 @@ Before setting up and running this backend, ensure that the following software i
 - Spring MVC is used as part of Spring Boot to handle the web layer of the application.
   
 ### 6. **CORS Configuration**
-- CORS (Cross-Origin Resource Sharing) is enabled globally in the backend to allow requests from any origin. It is configured via the `WebMvcConfigurer` interface.
+- CORS (Cross-Origin Resource Sharing) is enabled globally in the backend to allow requests from any origin.
 
 ### 7. **Flyway (Optional for Database Migrations)**
 - Flyway is used for managing and applying database migrations, helping to version control your database schema changes.
