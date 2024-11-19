@@ -7,54 +7,30 @@ enabling users to perform various football-related operations and also handles u
 ### Prerequisites
 Before setting up and running this backend, ensure that the following software is installed on your system:
 
-1. **Java Development Kit (JDK)**:
-   
-    - **version**: 1.8 or higher
-    - **Installation**: [Download JDK](https://www.oracle.com/java/technologies/downloads/?er=221886)
+1. **MySQL 8.0 (or higher)**:
+    - **Installation**: [Download MySQL](https://dev.mysql.com/downloads/installer)
       
-2. **Maven**:
+2. **Java 17 (or higher)**:
+   - **Installation**: [Download JDK](https://www.oracle.com/java/technologies/downloads/?er=221886)
+   - **Example Setting Enviroment Variable on Windows:**
+     ```bash
+        set JAVA_HOME=C:\path\to\your\jdk
+        set PATH=%JAVA_HOME%\bin;%PATH%
+   - **Example Setting Enviroment Variable on macOS/Linux:**
+      ```bash
+         export JAVA_HOME=/path/to/your/jdk
+         export PATH=$JAVA_HOME/bin:$PATH
 
-   - **Version**: 3.6.3 or higher (used for building and managing the Java project)
+3. **Apache Maven 3.9.6 (or higher)**:
    - **Installation**: [Download Maven](https://maven.apache.org/download.cgi)
-
-3. **MySQL**:
-   
-   - **Version**: 5.7 or higher
-   - **Installation**: [Download MySQL](https://dev.mysql.com/downloads/installer)
-   - **Setup**: Ensure you have a MySQL server running and create a database named 'football_project'
-
-4. **Git (optional, for cloning the repository)**:
-   
-   - **Installation**: [Download Git](https://git-scm.com/downloads)
-
-6. **IDE (Integrated Development Environment)**:
-   
-   - **Recommended**: IntelliJ IDEA
-   - **installation**: [Download IntelliJ IDEA](https://www.jetbrains.com/idea/download/?section=windows)
-
-### Environment Variables
-
-To run the application, you’ll need to set up the following environment variables:
-
-1. **DB_URL**:
-   - **Description**: The URL of the MySQL database
-   - **Example**: DB_URL=jdbc:mysql://localhost:3306/football_project
-
-2. **DB_USERNAME**:
-   - **Description**: The username for accessing the MySQL database
-   - **Example**: DB_USERNAME=root
-
-3. **DB_PASSWORD**:
-   - **Description**: The password for accessing the MySQL database
-   - **Example**: DB_PASSWORD=1234
-
-4. **JAVA_HOME**:
-   - **Description**: The path to the JDK installation
-   - **Example**: JAVA_HOME=C:\Program Files\Java\jdk1.8.0_251
-
-5. **MAVEN_HOME**:
-   - **Description**: The path to the Maven installation
-   - **Example**: MAVEN_HOME=C:\Program Files\Apache\maven
+   - **Example for setting Enviroment Variable on Windows:**
+     ```bash
+        set MAVEN_HOME=C:\path\to\maven
+        set PATH=%MAVEN_HOME%\bin;%PATH%
+   - **Example for setting Enviroment Variable on macOS/Linux:**
+     ```bash
+        export MAVEN_HOME=/path/to/maven
+        export PATH=$MAVEN_HOME/bin:$PATH
 
 ### Running the project
 
