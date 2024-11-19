@@ -61,38 +61,29 @@ Before setting up and running this backend, ensure that the following software i
 
 ### Tools and Technologies Used
 
-### 1. **Spring Boot**
-- Spring Boot is used as the main framework to create the RESTful API and handle all backend logic, including dependency injection, transaction management, and more.
+- **Java & Spring Boot:**
+    Core technologies for backend development, providing a robust and scalable foundation.
 
-### 2. **Hibernate ORM**
-- Hibernate is used as the Object-Relational Mapping (ORM) tool to manage database interactions. The application is configured to use Hibernate with MySQL as the database.
+- **Spring Data JPA:** Simplifies database interactions using Java Persistence API (JPA) for efficient data management.
 
-### 3. **MySQL**
-- MySQL is used as the relational database for storing application data (e.g., users, games, leagues, teams).
-
-### 4. **HikariCP**
-- HikariCP is used as the database connection pool provider for efficient database connection management.
-
-### 5. **Spring Data JPA**
-- Spring Data JPA is used for simplifying database interactions, though it is not explicitly shown in the `AppConfig` class, it could be used for CRUD operations and simplifying database access.
-
-### 6. **Spring MVC**
-- Spring MVC is used as part of Spring Boot to handle the web layer of the application.
+- **Spring MVC:** Web framework for building RESTful APIs with a model-view-controller architecture.
   
-### 6. **CORS Configuration**
-- CORS (Cross-Origin Resource Sharing) is enabled globally in the backend to allow requests from any origin.
+- **RESTful APIs:** Experience in designing and developing REST APIs within the Spring ecosystem, following best practices for stateless, scalable, and secure endpoints.
+  
+- **MySQL:** Relational database used for data storage and management.
 
-### 7. **Flyway (Optional for Database Migrations)**
-- Flyway is used for managing and applying database migrations, helping to version control your database schema changes.
+- **Flyway:** Database migration tool for version control of schemas and automated migrations.
 
-### 8. **Java**
-- The application requires **Java 17** or higher (OpenJDK or Amazon Corretto). The necessary Java version should be set via the `JAVA_HOME` environment variable.
+- **Hibernate ORM (JPA):** Manages database operations and object-relational mapping (ORM) to persist Java objects.
+  
+- **Transaction Management:** ensures atomic operations, preventing inconsistent database states.
 
-### 9. **Maven**
-- The project is built and managed using **Apache Maven**.
+- **HikariCP:** High-performance connection pool for efficient database connection management.
 
-### 10. **Transaction Management**
-- Spring’s `@Transactional` annotation is used for automatic transaction management, ensuring that operations like database writes and updates are wrapped in transactions.
+- **Maven:** A build and dependency management tool for Java projects, automating tasks such as compilation, testing, packaging, and dependency resolution.
 
+- **Git**: Version control system for code collaboration and management.
 
+- **Postman:** Tool for testing and interacting with REST APIs.
 
+- **JUnit:** Framework for unit testing Java code to ensure robustness and correctness.
