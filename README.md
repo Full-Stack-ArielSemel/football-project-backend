@@ -75,6 +75,9 @@ Before setting up and running this backend, ensure that the following software i
 
 ### 5. **Spring Data JPA**
 - Spring Data JPA is used for simplifying database interactions, though it is not explicitly shown in the `AppConfig` class, it could be used for CRUD operations and simplifying database access.
+
+### 6. **Spring MVC**
+- Spring MVC is used as part of Spring Boot to handle the web layer of the application.
   
 ### 6. **CORS Configuration**
 - CORS (Cross-Origin Resource Sharing) is enabled globally in the backend to allow requests from any origin. It is configured via the `WebMvcConfigurer` interface.
