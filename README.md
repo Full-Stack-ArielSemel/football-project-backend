@@ -59,17 +59,37 @@ Before setting up and running this backend, ensure that the following software i
       mvn clean install
       mvn spring-boot:run
 
-### Key Features
+### Tools and Technologies Used
 
- 1. **RESTful API with Spring Boot**: Provides a robust backend for managing football matches, teams, leagues, and users with comprehensive CRUD operations
-    
- 2. **MySQL Database Integration**: Stores all match, team, league, and user data, ensuring persistent and reliable data management
-    
- 3. **Hibernate ORM**: Utilizes Hibernate for Object-Relational Mapping (ORM), simplifying database interactions and enhancing data handling efficiency
-    
- 4. **Real-Time Updates**: Supports real-time updates for live match scores and league tables, keeping users informed with the latest information
-    
- 5. **User Authentication and Authorization**: Ensures secure access to the application, allowing users to register, log in, and manage their data securely
-     
- 6. **Efficient Data Management**: Optimizes data queries and transactions, providing fast and reliable performance for all backend operations
+### 1. **Spring Boot**
+- Spring Boot is used as the main framework to create the RESTful API and handle all backend logic, including dependency injection, transaction management, and more.
+
+### 2. **Hibernate ORM**
+- Hibernate is used as the Object-Relational Mapping (ORM) tool to manage database interactions. The application is configured to use Hibernate with MySQL as the database.
+
+### 3. **MySQL**
+- MySQL is used as the relational database for storing application data (e.g., users, games, leagues, teams).
+
+### 4. **HikariCP**
+- HikariCP is used as the database connection pool provider for efficient database connection management.
+
+### 5. **Spring Data JPA**
+- Spring Data JPA is used for simplifying database interactions, though it is not explicitly shown in the `AppConfig` class, it could be used for CRUD operations and simplifying database access.
+  
+### 6. **CORS Configuration**
+- CORS (Cross-Origin Resource Sharing) is enabled globally in the backend to allow requests from any origin. It is configured via the `WebMvcConfigurer` interface.
+
+### 7. **Flyway (Optional for Database Migrations)**
+- Flyway is used for managing and applying database migrations, helping to version control your database schema changes.
+
+### 8. **Java**
+- The application requires **Java 17** or higher (OpenJDK or Amazon Corretto). The necessary Java version should be set via the `JAVA_HOME` environment variable.
+
+### 9. **Maven**
+- The project is built and managed using **Apache Maven**.
+
+### 10. **Transaction Management**
+- Spring’s `@Transactional` annotation is used for automatic transaction management, ensuring that operations like database writes and updates are wrapped in transactions.
+
+
 
