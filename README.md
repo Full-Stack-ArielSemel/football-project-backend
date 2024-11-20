@@ -1,80 +1,99 @@
+## Table of Contents
+
+1. [Overview](#overview)
+2. [Prerequisites](#prerequisites)
+3. [Database Setup](#database-setup)
+4. [Running the Project](#running-the-project)
+5. [Tools and Technologies Used](#tools-and-technologies-used)
+
 ### Overview
 **This is the backend of the Football Project, A RESTful API for managing football games, real-time scores and standings, built with Spring Boot and MySQL.
 Users can create games, update the scores of their own games, and view real-time results and league standings for all users across various leagues.
 It provides RESTful APIs that the frontend interacts with,
 enabling users to perform various football-related operations and also handles user authentication and authorization, ensuring secure access to the system.**
 
+**For the frontend Repository of this project, visit the [Frontend Repository](https://github.com/Full-Stack-ArielSemel/football-project-frontend).**
+
 ### Prerequisites
 Before setting up and running this backend, ensure that the following software is installed on your system:
 
-1. **Java Development Kit (JDK)**:
-   
-    - **version**: 1.8 or higher
-    - **Installation**: [Download JDK](https://www.oracle.com/java/technologies/downloads/?er=221886)
+1. **MySQL 8.0 (or higher)**:
+    - **Installation**: [Download MySQL](https://dev.mysql.com/downloads/installer)
       
-2. **Maven**:
+2. **Java 17 (or higher)**:
+   - **Installation**: [Download JDK](https://www.oracle.com/java/technologies/downloads/?er=221886)
+   - **Example Setting Enviroment Variable on Windows:**
+     ```bash
+        set JAVA_HOME=C:\path\to\your\jdk
+        set PATH=%JAVA_HOME%\bin;%PATH%
+   - **Example Setting Enviroment Variable on macOS/Linux:**
+      ```bash
+         export JAVA_HOME=/path/to/your/jdk
+         export PATH=$JAVA_HOME/bin:$PATH
 
-   - **Version**: 3.6.3 or higher (used for building and managing the Java project)
+3. **Apache Maven 3.9.6 (or higher)**:
    - **Installation**: [Download Maven](https://maven.apache.org/download.cgi)
+   - **Example for setting Enviroment Variable on Windows:**
+     ```bash
+        set MAVEN_HOME=C:\path\to\maven
+        set PATH=%MAVEN_HOME%\bin;%PATH%
+   - **Example for setting Enviroment Variable on macOS/Linux:**
+     ```bash
+        export MAVEN_HOME=/path/to/maven
+        export PATH=$MAVEN_HOME/bin:$PATH
 
-3. **MySQL**:
+### Database Setup
+1. **Create a new Database:**
+   ```bash
+   CREATE DATABASE your_db_name;
    
-   - **Version**: 5.7 or higher
-   - **Installation**: [Download MySQL](https://dev.mysql.com/downloads/installer)
-   - **Setup**: Ensure you have a MySQL server running and create a database named 'football_project'
-
-4. **Git (optional, for cloning the repository)**:
-   
-   - **Installation**: [Download Git](https://git-scm.com/downloads)
-
-6. **IDE (Integrated Development Environment)**:
-   
-   - **Recommended**: IntelliJ IDEA
-   - **installation**: [Download IntelliJ IDEA](https://www.jetbrains.com/idea/download/?section=windows)
-
-### Environment Variables
-
-To run the application, you’ll need to set up the following environment variables:
-
-1. **DB_URL**:
-   - **Description**: The URL of the MySQL database
-   - **Example**: DB_URL=jdbc:mysql://localhost:3306/football_project
-
-2. **DB_USERNAME**:
-   - **Description**: The username for accessing the MySQL database
-   - **Example**: DB_USERNAME=root
-
-3. **DB_PASSWORD**:
-   - **Description**: The password for accessing the MySQL database
-   - **Example**: DB_PASSWORD=1234
-
-4. **JAVA_HOME**:
-   - **Description**: The path to the JDK installation
-   - **Example**: JAVA_HOME=C:\Program Files\Java\jdk1.8.0_251
-
-5. **MAVEN_HOME**:
-   - **Description**: The path to the Maven installation
-   - **Example**: MAVEN_HOME=C:\Program Files\Apache\maven
-
+2. **Configure Database Credentials:**
+   - Download the .env.sample file and rename it to .env in the root directory of your project.
+   - Update the .env file with your database credentials and any other environment variables required by the application (e.g., API keys, secret keys).
+     
+3. **Flyway Database Migration:**
+   - Flyway is already set up in the project to manage database schema migrations. The migration scripts are located in src/main/resources/db/migration/
+   - **Automatic Migration**: When you run the application, Flyway will automatically apply any pending migrations to the database.
+   - **Manual Migration**: Alternatively, you can manually run migrations with this Maven command:
+     ```bash
+     mvn flyway:migrate
+     
 ### Running the project
 
-- Navigate to the project directory : cd /path/to/your/project
+1. **Navigate to the project directory:**
+   ```bash
+      cd /path/to/your/project
+   
+2. **Run the project using Maven:**
+   ```bash
+      mvn clean install
+      mvn spring-boot:run
 
-- Run the project using Maven:
-   - mvn clean install
-   - mvn spring-boot:run
+### Tools and Technologies Used
 
-### Key Features
+- **Java & Spring Boot:**
+    Core technologies for backend development, providing a robust and scalable foundation.
 
- 1. **RESTful API with Spring Boot**: Provides a robust backend for managing football matches, teams, leagues, and users with comprehensive CRUD operations
-    
- 2. **MySQL Database Integration**: Stores all match, team, league, and user data, ensuring persistent and reliable data management
-    
- 3. **Hibernate ORM**: Utilizes Hibernate for Object-Relational Mapping (ORM), simplifying database interactions and enhancing data handling efficiency
-    
- 4. **Real-Time Updates**: Supports real-time updates for live match scores and league tables, keeping users informed with the latest information
-    
- 5. **User Authentication and Authorization**: Ensures secure access to the application, allowing users to register, log in, and manage their data securely
-     
- 6. **Efficient Data Management**: Optimizes data queries and transactions, providing fast and reliable performance for all backend operations
+- **Spring Data JPA:** Simplifies database interactions using Java Persistence API (JPA) for efficient data management.
 
+- **Spring MVC:** Web framework for building RESTful APIs with a model-view-controller architecture.
+  
+- **RESTful APIs:** Experience in designing and developing REST APIs within the Spring ecosystem, following best practices for stateless, scalable, and secure endpoints.
+  
+- **MySQL:** Relational database used for data storage and management.
+
+- **Flyway:** Database migration tool for version control of schemas and automated migrations.
+
+- **Hibernate ORM (JPA):** Manages database operations and object-relational mapping (ORM) to persist Java objects.
+  
+- **Transaction Management:** ensures atomic operations, preventing inconsistent database states.
+
+- **HikariCP:** High-performance connection pool for efficient database connection management.
+
+- **Maven:** A build and dependency management tool for Java projects, automating tasks such as compilation, testing, packaging, and dependency resolution.
+
+- **Git**: Version control system for code collaboration and management.
+
+- **Postman:** Tool for testing and interacting with REST APIs.
+
+- **JUnit:** Framework for unit testing Java code to ensure robustness and correctness.
