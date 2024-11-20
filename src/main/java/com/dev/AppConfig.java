@@ -41,16 +41,24 @@ public class AppConfig implements WebMvcConfigurer{
         config.setUsername(dbUsername);
         config.setPassword(dbPassword);
         config.setDriverClassName("com.mysql.cj.jdbc.Driver");
+    
+        config.setMaximumPoolSize(20); 
+        config.setMinimumIdle(10);   
+        config.setIdleTimeout(300000); 
+        config.setLeakDetectionThreshold(2000); 
+    
+        config.setConnectionTimeout(0);
+    
         return new HikariDataSource(config);
     }
-
+    
     @Bean
     public Properties hibernateProperties() {
         Properties settings = new Properties();
         settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQL8Dialect");
         settings.put(Environment.SHOW_SQL, "true");
         settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-        settings.put(Environment.HBM2DDL_AUTO, "validate");
+        settings.put(Environment.HBM2DDL_AUTO, "none");
         settings.put(Environment.ENABLE_LAZY_LOAD_NO_TRANS, true);
         return settings;
     }
