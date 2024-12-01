@@ -59,14 +59,14 @@ public class GameController {
     public BasicResponse addNEwGame(String token , int homeTeamID , int awayTeamID, int leagueID){
 
        if(homeTeamID==awayTeamID){
-           return new BasicResponse(false,ERROR_CANT_CHOOSE_TWO_IDENTICAL_TEAMS);
+           return new BasicResponse(false,ERROR_CHOOSING_TWO_IDENTICAL_TEAMS);
        }
        User user = persist.getUserByToken(token);
        if(user==null){
            return new BasicResponse(false,ERROR_NO_SUCH_TOKEN);
        }
        if(persist.LeagueDoesntExist(leagueID)){
-           return new BasicResponse(false,ERROR_THIS_LEAGUE_DOESNT_EXIST);
+           return new BasicResponse(false,ERROR_LEAGUE_DOESNT_EXIST);
        }
        if(persist.TeamDoesntExist(homeTeamID)){
            return new BasicResponse(false,ERROR_HOME_TEAM_DOESNT_EXIST);
@@ -82,10 +82,10 @@ public class GameController {
            return new BasicResponse(false,ERROR_AWAY_TEAM_ALREADY_LIVE);
        }
        if(persist.isTeamNotMatchToSpecificLeague(homeTeamID,leagueID)){
-           return new BasicResponse(false,ERROR_THIS_HOME_TEAM_DOESNT_EXIST_IN_THIS_LEAGUE);
+           return new BasicResponse(false,ERROR_HOME_TEAM_DOESNT_EXIST_IN_THIS_LEAGUE);
        }
        if(persist.isTeamNotMatchToSpecificLeague(awayTeamID,leagueID)){
-           return new BasicResponse(false,ERROR_THIS_AWAY_TEAM_DOESNT_EXIST_IN_THIS_LEAGUE);
+           return new BasicResponse(false,ERROR_AWAY_TEAM_DOESNT_EXIST_IN_THIS_LEAGUE);
        }
        Game game = persist.addGame(user,homeTeamID,awayTeamID,leagueID);
        persist.saveGame(game);

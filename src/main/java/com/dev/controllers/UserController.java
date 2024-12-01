@@ -43,10 +43,10 @@ public class UserController {
     @RequestMapping(value = "sign-up")
     public BasicResponse signUp(String username, String password) {
 
-        if(username==null){
+        if(username==null || username.trim().isEmpty()){
             return new BasicResponse(false,ERROR_MISSING_USERNAME);
         }
-        if(password==null){
+        if(password == null || password.trim().isEmpty()){
             return new BasicResponse(false, ERROR_MISSING_PASSWORD);
         }
         if (!utils.validPasswordSize(password)) {
@@ -66,6 +66,18 @@ public class UserController {
         }
         if (!utils.isUsernameContainsLetter(username)){
             return new BasicResponse(false, ERROR_USERNAME_WITHOUT_LETTER);
+        }
+        if (!utils.isPasswordStartsWithLetterOrDigit(password)){
+            return new BasicResponse(false, ERROR_PASSWORD_START_WITH_LETTER_OR_DIGIT);
+        }
+        if (!utils.isUsernameStartWithLetter(username)){
+            return new BasicResponse(false, ERROR_USERNAME_STARTWITH_LETTER);
+        }
+        if (utils.isUsernameContainsSpaces(username)) {
+            return new BasicResponse(false, ERROR_USERNAME_CONTAINS_SPACES);
+        }
+        if (utils.isPasswordContainsSpaces(password)) {
+            return new BasicResponse(false, ERROR_PASSWORD_CONTAINS_SPACES);
         }
 
         User fromDb = persist.getUserByUsername(username);

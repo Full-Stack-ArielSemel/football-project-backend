@@ -4,19 +4,17 @@ import com.dev.models.Game;
 import com.dev.models.Team;
 import com.dev.models.TeamStats;
 import org.springframework.stereotype.Component;
-
 import javax.xml.bind.DatatypeConverter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.regex.Pattern;
 import static com.dev.utils.Constants.MINIMAL_PASSWORD_LENGTH;
 import static com.dev.utils.Constants.MINIMAL_USERNAME_LENGTH;
 
 @Component
 public class Utils {
-
 
     public String createHash (String username, String password) {
         String raw = String.format("%s_%s", username, password);
@@ -38,50 +36,41 @@ public class Utils {
         return username.length()>=MINIMAL_USERNAME_LENGTH;
     }
 
-    public boolean isUsernameContainsLetter(String username){
-        int countLowerLetters = 0 , countCapitalLetters = 0;
-        for(int i=0;i<username.length();i++){
-            if(username.charAt(i)>='a'&&username.charAt(i)<='z'){
-                countLowerLetters++;
-            }
-            if(username.charAt(i)>='A'&&username.charAt(i)<='Z'){
-                countCapitalLetters++;
-            }
-        }
-        return countCapitalLetters>0 || countLowerLetters>0;
-    }
     public boolean validPasswordSize (String password) {
-        return password.length() >= MINIMAL_PASSWORD_LENGTH;
+        return password.length()>=MINIMAL_PASSWORD_LENGTH;
+    }
+
+    public boolean isUsernameContainsLetter(String username){
+        return Pattern.compile("[a-zA-Z]").matcher(username).find();
     }
 
     public boolean isPasswordContainsCapitalLetter(String password){
-        int count = 0;
-        for(int i=0;i<password.length();i++){
-            if(password.charAt(i)>='A'&& password.charAt(i)<='Z'){
-                count++;
-            }
-        }
-        return count>0;
+        return Pattern.compile("[A-Z]").matcher(password).find();
     }
+
     public boolean isPasswordContainsLowerLetter(String password){
-        int count = 0;
-        for(int i=0;i<password.length();i++){
-            if(password.charAt(i)>='a'&& password.charAt(i)<='z'){
-                count++;
-            }
-        }
-        return count>0;
+        return Pattern.compile("[a-z]").matcher(password).find();
     }
 
     public boolean isPasswordContainsDigit(String password){
-        int countDigits = 0;
-        for(int i=0;i<password.length();i++){
-            if(password.charAt(i)>='0'&& password.charAt(i)<='9'){
-                countDigits++;
-            }
-        }
-        return countDigits>0;
+        return Pattern.compile("[0-9]").matcher(password).find();
     }
+
+    public boolean isUsernameStartWithLetter(String username){
+        return Character.isLetter(username.charAt(0));
+    }
+
+    public boolean isPasswordStartsWithLetterOrDigit(String password) {
+        return Character.isLetterOrDigit(password.charAt(0));
+    }
+    public boolean isUsernameContainsSpaces(String username) {
+        return username != null && username.contains(" ");
+    }
+    
+    public boolean isPasswordContainsSpaces(String password) {
+        return password != null && password.contains(" ");
+    }
+
 
     public List<TeamStats> calculateTable(List<Team> teams, List<Game>games) {
         List<TeamStats> teamStats = new ArrayList<>();
@@ -154,7 +143,6 @@ public class Utils {
             }
         }
     }
-
 
     public List<TeamStats> initializeTeams(List<Team> teams, List<TeamStats> teamStats) {
         for (Team team : teams) {

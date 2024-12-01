@@ -42,13 +42,6 @@ public class AppConfig implements WebMvcConfigurer{
         config.setPassword(dbPassword);
         config.setDriverClassName("com.mysql.cj.jdbc.Driver");
     
-        config.setMaximumPoolSize(20); 
-        config.setMinimumIdle(10);   
-        config.setIdleTimeout(300000); 
-        config.setLeakDetectionThreshold(2000); 
-    
-        config.setConnectionTimeout(0);
-    
         return new HikariDataSource(config);
     }
     
